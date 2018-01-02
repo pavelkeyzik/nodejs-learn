@@ -4,7 +4,11 @@ var app = express();
 var port = process.env.PORT || 8080;
 
 app.get('/', (req, res) => {
-  res.send('Hello world! Check it out!');
+  res.send('Home Page');
+});
+
+app.get('/admin', (req, res) => {
+  res.send('Admin page');
 });
 
 app.listen(port, () => {
