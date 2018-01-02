@@ -1,9 +1,12 @@
-var http = require('http');
+var express = require('express');
+var app = express();
 
-var server = new http.Server();
+var port = process.env.PORT || 8080;
 
-server.listen(proccess.env.PORT || 3030, 'localhost');
+app.get('/', (req, res) => {
+  res.send('Hello world! Check it out!');
+});
 
-server.on('request', function(req, res) {
-    res.end('Hello World!');
+app.listen(port, () => {
+  console.log(`App runned on ${port}`)
 });
