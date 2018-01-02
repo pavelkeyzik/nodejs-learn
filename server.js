@@ -16,4 +16,4 @@ app.get('/admin/:name', function (req, res) {
     res.sendFile(path.join(ROOT, 'admin.html'));
 });
 
-app.listen(8080);
+app.listen(process.env.PORT || 8080);
