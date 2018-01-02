@@ -1,41 +1,19 @@
 var express = require('express');
-var fs = require('fs');
 var path = require('path');
-var log = require('./log')(module);
+
+var ROOT = __dirname + '/public/';
 
 var app = express();
-var staticDir = __dirname + '/public';
+app.use(express.static(ROOT));
 
-var port = process.env.PORT || 8080;
 
-app.get('/', function (req, res) {
-
-  fs.readFile('public/index.html', function (err, info) {
-      if(err) {
-        log.error(err);
-        res.sendStatus(500);
-        res.send('Server error!');
-        return;
-      }
-      res.sendFile(path.join(staticDir, 'index.html'));
-  });
-
+app.get('/', function(req, res) {
+    res.sendFile(path.join(ROOT, '/index.html'));
 });
 
-app.get('/admin', function (req, res) {
-
-  fs.readFile('public/admin.html', function (err, data) {
-     if(err) {
-       log.error(err);
-       res.statusCode(500);
-       res.send('Sever error');
-       return;
-     }
-     res.sendFile(path.join(staticDir, 'admin.html'));
-  });
-
+app.get('/admin/:name', function (req, res) {
+    console.log(req.params.name);
+    res.sendFile(path.join(ROOT, 'admin.html'));
 });
 
-app.listen(port, function (req, res) {
-  console.log('App runned on ' + port);
-});
+app.listen(process.env.PORT || 8080);
