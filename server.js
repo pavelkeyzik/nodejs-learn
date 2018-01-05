@@ -8,6 +8,10 @@ var app = express();
 var appRoutes = express.Router();
 var hbs = require('express-handlebars');
 
+var home = require('./lib/home');
+var admin = require('./lib/admin');
+var errorPage = require('./lib/errorPage');
+
 app.engine('hbs', hbs({extname: 'hbs', defaultLayout: 'layout', layoutsDir: path.join(ROOT, 'views/layouts')}));
 app.set('views', path.join(ROOT, 'views'));
 app.set('view engine', 'hbs');
@@ -15,12 +19,7 @@ app.set('view engine', 'hbs');
 app.use(express.static(ROOT));
 
 app.get('/', function(req, res) {
-  var params = {
-    title: 'Home Page',
-    description: 'This is NodeJS Learn home page'
-  };
-
-  res.render('index', params);
+  res.render('index', home.getParams());
 });
 
 appRoutes.use(function(req, res, next) {
@@ -40,17 +39,12 @@ appRoutes.use(function(req, res, next) {
 app.use('/admin', appRoutes);
 
 app.get('/admin', function (req, res) {
-  var params = {
-    title: 'Admin Panel',
-    description: 'This is Admin Panel'
-  };
-
-  res.render('admin', params);
+  res.render('admin', admin.getParams());
 });
 
 app.use(function(req, res, next) {
   res.status(404);
-  res.render('404');
+  res.render('404', errorPage.getParams());
 });
 
 app.listen(process.env.PORT || 8080);
