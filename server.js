@@ -15,7 +15,12 @@ app.set('view engine', 'hbs');
 app.use(express.static(ROOT));
 
 app.get('/', function(req, res) {
-  res.render('index');
+  var params = {
+    title: 'Home Page',
+    description: 'This is NodeJS Learn home page'
+  };
+
+  res.render('index', params);
 });
 
 appRoutes.use(function(req, res, next) {
@@ -35,7 +40,12 @@ appRoutes.use(function(req, res, next) {
 app.use('/admin', appRoutes);
 
 app.get('/admin', function (req, res) {
-  res.render('admin');
+  var params = {
+    title: 'Admin Panel',
+    description: 'This is Admin Panel'
+  };
+
+  res.render('admin', params);
 });
 
 app.use(function(req, res, next) {
