@@ -16,20 +16,26 @@ app.get('/', function(req, res) {
 appRoutes.use(function(req, res, next) {
   var urlParsed = url.parse(req.url, true);
 
-  if(urlParsed.path == '/admin/pavel') {
+  if(urlParsed.path == '/') {
     next();
   } else {
-    res.status(403).send({
+    res.status(403);
+    res.send({
       success: false,
       message: 'No token provided.'
     })
   }
 });
 
-app.use('/', appRoutes);
+app.use('/admin', appRoutes);
 
-app.get('/admin/:name', function (req, res) {
+app.get('/admin', function (req, res) {
   res.sendFile(path.join(ROOT, 'admin.html'));
+});
+
+app.use(function(req, res, next) {
+  res.status(404);
+  res.sendFile(path.join(ROOT, '404.html'));
 });
 
 app.listen(process.env.PORT || 8080);
