@@ -6,11 +6,16 @@ var ROOT = __dirname + '/public/';
 
 var app = express();
 var appRoutes = express.Router();
+var hbs = require('express-handlebars');
+
+app.engine('hbs', hbs({extname: 'hbs', defaultLayout: 'layout', layoutsDir: path.join(ROOT, 'views/layouts')}));
+app.set('views', path.join(ROOT, 'views'));
+app.set('view engine', 'hbs');
 
 app.use(express.static(ROOT));
 
 app.get('/', function(req, res) {
-    res.sendFile(path.join(ROOT, 'index.html'));
+  res.render('index');
 });
 
 appRoutes.use(function(req, res, next) {
@@ -30,12 +35,12 @@ appRoutes.use(function(req, res, next) {
 app.use('/admin', appRoutes);
 
 app.get('/admin', function (req, res) {
-  res.sendFile(path.join(ROOT, 'admin.html'));
+  res.render('admin');
 });
 
 app.use(function(req, res, next) {
   res.status(404);
-  res.sendFile(path.join(ROOT, '404.html'));
+  res.render('404');
 });
 
 app.listen(process.env.PORT || 8080);
