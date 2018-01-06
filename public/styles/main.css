@@ -1,0 +1,158 @@
+/*
+ * App author: Pavel Keyzik
+ * - MENU -----------------
+ * (1) TopNav
+ *
+ *
+ *
+*/
+
+:root {
+  --primary: #fc6a42;
+  --secondary: #648cff;
+  --success: red;
+  --danger: red;
+  --warning: red;
+  --info: red;
+  --light: #e1e1e1;
+  --dark: #353854;
+  --white: #fff;
+
+  --maxWidthOfSite: 1170px;
+  --topNavHeight: 100px;
+  --topNavHeightScrolled: 80px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  margin: 0;
+  font-family: 'Ubuntu';
+  position: relative;
+}
+
+header {
+  background: var(--secondary);
+  height: 960px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.header__bottom {
+  position: absolute;
+  bottom: 65px;
+  width: 100%;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow {
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  height: 50px;
+  min-width: 50px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.arrow:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px var(--dark);
+}
+
+/* -> (1) TopNav start */
+
+.top-nav {
+  display: flex;
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  top: 0;
+  left: 0;
+  transition: .4s;
+}
+
+.top-nav--unscrolled {
+  background: none;
+}
+
+.top-nav--unscrolled nav {
+  transition: height .4s;
+  height: var(--topNavHeight);
+}
+
+.top-nav--scrolled {
+  background: var(--dark);
+  box-shadow: 0 0 6px var(--dark);
+}
+
+.top-nav--scrolled nav {
+  transition: height .4s;
+  height: var(--topNavHeightScrolled);
+}
+
+.top-nav nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: var(--maxWidthOfSite);
+  margin: 0 auto;
+}
+
+.top-nav__logo {
+  font-weight: bold;
+  color: var(--white);
+  font-size: 24px;
+}
+
+.top-nav__link {
+  font-size: 18px;
+  display: flex;
+}
+
+.top-nav__link a {
+  padding: 0 40px;
+  color: var(--light);
+  transition: .3s;
+}
+
+.top-nav__link a:hover {
+  color: var(--white);
+}
+
+.top-nav__social {
+  display: flex;
+}
+
+.top-nav__social img {
+  width: 26px;
+  height: 26px;
+}
+
+.top-nav__social a:not(:last-child) {
+  margin-right: 43px;
+}
+
+.top-nav__social a {
+  transition: .3s;
+}
+
+.top-nav__social a:hover {
+  opacity: 0.9;
+}
+
+/* <- TopNav end */
